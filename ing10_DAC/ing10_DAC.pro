@@ -25,39 +25,44 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 
 SOURCES += \
-        main.cpp \
-        dac.cpp \
-        baseserialcomm.cpp \
-        mbserialmaster.cpp
+        src/main.cpp \
+        src/dac.cpp \
+        src/baseserialcomm.cpp \
+        src/mbserialmaster.cpp \
+        src/protocoldialog.cpp
 
 HEADERS += \
-        dac.h \
-        baseserialcomm.h \
-        mbserialmaster.h
-
+        inc/dac.h \
+        inc/baseserialcomm.h \
+        inc/mbserialmaster.h \
+        inc/protocoldialog.h
 
 FORMS += \
-        dac.ui
+        ui/dac.ui \
+        ui/protocoldialog.ui
+
+RESOURCES += res/images.qrc
+
+RC_ICONS = /res/general/ing10.ico
+
+# 生成的ui.h所在路径
+UI_DIR += ./ui
+# 头文件路径
+INCLUDEPATH +=  inc
 
 # 配置输出路径: debug和release模式下的输出路径
 # 配置动态链接库的路径: debug和release模式下的dll路径
 CONFIG(debug, debug|release){
-DESTDIR = ../debug                 # .exe 路径
+DESTDIR = ./exe                 # .exe 路径
 #LIBS  += -L ../../debug -lSerialComm # .dll 路径
 }else {
-DESTDIR = ../release
+DESTDIR = ./exe
 #LIBS  += -L ../../release -lSerialComm
 }
 
+# 预编译头文件
 CONFIG += precompile_header
-
-PRECOMPILED_HEADER += dac.h \
-                      mbserialmaster.h \
-                      baseserialcomm.h
-
-UI_DIR = ./UI
-
-RESOURCES += \
-    images.qrc
-RC_ICONS= ./res/ico/ing10.ico
+PRECOMPILED_HEADER += inc/dac.h \
+                      inc/mbserialmaster.h \
+                      inc/baseserialcomm.h
 
